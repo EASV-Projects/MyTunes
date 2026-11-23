@@ -3,28 +3,18 @@ package easvprojects.mytunes.be;
 public class Artist {
     private int id;
     private String name;
-    private String country;
 
-    public Artist() {
+    public Artist(String name) {
+        this.name = name;
     }
 
-    public Artist(int id, String name, String genre, String country) {
+    public Artist(int id, String name) {
         this.id = id;
         this.name = name;
-        this.country = country;
-    }
-
-    public Artist(String name, String genre, String country) {
-        this.name = name;
-        this.country = country;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -35,11 +25,5 @@ public class Artist {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
-    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }
