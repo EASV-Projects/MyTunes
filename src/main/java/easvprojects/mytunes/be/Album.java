@@ -5,8 +5,8 @@ import java.util.List;
 public class Album {
     private int id;
     private String name;
-    private List<Genre> genreList;
-    private List<Song> songList;
+    private List<Genre> genres;
+    private List<Song> songs;
 
 
 
@@ -26,8 +26,8 @@ public class Album {
     public String getName(){
         return name;
     }
-    public List<Genre> getGenreList() { return genreList;}
-    public List<Song> getSongList(){ return songList;}
+    public List<Genre> getGenres() { return genres;}
+    public List<Song> getSongs(){ return songs;}
 
 
 }
