@@ -4,10 +4,9 @@ package easvprojects.mytunes.dal;
 
 public interface IPlaylistDAO {
     void insertPlaylist();
-    ISongDAO getSong();
+    ISongDAO getSongById(int id);
     void removeSongFromPlaylist();
-    void addSongtoPlaylist();
+    void addSongToPlaylist();
     void deletePlaylist();
     void editPlaylistName();
-
 }
