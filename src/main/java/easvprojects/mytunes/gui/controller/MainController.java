@@ -3,8 +3,12 @@ package easvprojects.mytunes.gui.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 
 public class MainController {
+    @FXML private Region coverArtBox;
+    @FXML private BorderPane rootPane;
     @FXML private Button prevButton;
     @FXML private Button playPauseButton;
     @FXML private Button nextButton;
