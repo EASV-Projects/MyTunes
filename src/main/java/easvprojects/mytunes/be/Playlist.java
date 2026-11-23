@@ -7,9 +7,9 @@ public class Playlist {
     private int id;
     private String name;
     private String description;
-    private List<String> songs = new ArrayList<>();
+    private List<Song> songs = new ArrayList<>();
 
-    public Playlist(int id, String name, String description, List<String> songs){
+    public Playlist(int id, String name, String description, List<Song> songs){
         this.id = id;
         this.name = name;
         this.description =  description;
@@ -28,9 +28,8 @@ public class Playlist {
         return this.description;
     }
 
-    public List<String> getSongs(){
+    public List<Song> getSongs(){
         return this.songs;
     }
-
 
 }
