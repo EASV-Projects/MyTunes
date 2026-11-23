@@ -20,12 +20,10 @@ public class SongController {
     @FXML private Button cancelButton;
     @FXML private Button saveButton;
 
-    public void handleChooseFile(ActionEvent actionEvent) {
+
+    public void onBtnCancel(ActionEvent actionEvent) {
     }
 
-    public void handleCancel(ActionEvent actionEvent) {
-    }
-
-    public void handleSave(ActionEvent actionEvent) {
+    public void onBtnSave(ActionEvent actionEvent) {
     }
 }

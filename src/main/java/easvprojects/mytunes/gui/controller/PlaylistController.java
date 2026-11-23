@@ -14,9 +14,11 @@ public class PlaylistController {
     @FXML private BorderPane dialogRoot;
     @FXML private TextField nameField;
 
-    public void handleCancel(ActionEvent actionEvent) {
+
+
+    public void onBtnCancel(ActionEvent actionEvent) {
     }
 
-    public void handleSave(ActionEvent actionEvent) {
+    public void onBtnSave(ActionEvent actionEvent) {
     }
 }

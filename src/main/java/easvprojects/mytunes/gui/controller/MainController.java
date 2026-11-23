@@ -53,47 +53,47 @@ public class MainController {
 
 
 
-    public void handleFilter(ActionEvent actionEvent) {
+    
+
+    public void onBtnPrevious(ActionEvent actionEvent) {
     }
 
-    public void handlePrevious(ActionEvent actionEvent) {
+    public void onBtnPlayPause(ActionEvent actionEvent) {
     }
 
-    public void handlePlayPause(ActionEvent actionEvent) {
+    public void onBtnNext(ActionEvent actionEvent) {
     }
 
-    public void handleNext(ActionEvent actionEvent) {
+    public void onBtnFilter(ActionEvent actionEvent) {
     }
 
-    public void handleNewPlaylist(ActionEvent actionEvent) {
+    public void onBtnNewPlaylist(ActionEvent actionEvent) {
     }
 
-    public void handleEditPlaylist(ActionEvent actionEvent) {
+    public void onBtnPlaylist(ActionEvent actionEvent) {
     }
 
-    public void handleDeletePlaylist(ActionEvent actionEvent) {
+    public void onBtnDeletePlaylist(ActionEvent actionEvent) {
     }
 
-    public void handleMoveSongUp(ActionEvent actionEvent) {
+    public void onBtnMoveSongUp(ActionEvent actionEvent) {
     }
 
-    public void handleMoveSongDown(ActionEvent actionEvent) {
+    public void onBtnMoveSongDown(ActionEvent actionEvent) {
     }
 
-    public void handleRemoveSongFromPlaylist(ActionEvent actionEvent) {
+    public void onBtnRemoveSongFromPlaylist(ActionEvent actionEvent) {
     }
 
-    public void handleAddSongToPlaylist(ActionEvent actionEvent) {
-        
+    public void onBtnAddSongToPlaylist(ActionEvent actionEvent) {
     }
 
-    public void handleNewSong(ActionEvent actionEvent) {
+    public void onBtnNewSong(ActionEvent actionEvent) {
     }
 
-    public void handleEditSong(ActionEvent actionEvent) {
+    public void onBtnEditSong(ActionEvent actionEvent) {
     }
 
-    public void handleDeleteSong(ActionEvent actionEvent) {
-        
+    public void onBtnDeleteSong(ActionEvent actionEvent) {
     }
 }

@@ -24,9 +24,9 @@
 
 
             <HBox alignment="CENTER" spacing="10.0">
-                <Button fx:id="prevButton" onAction="#handlePrevious" styleClass="icon-btn" text="⏮" />
-                <Button fx:id="playPauseButton" onAction="#handlePlayPause" styleClass="play-btn" text="⏸" />
-                <Button fx:id="nextButton" onAction="#handleNext" styleClass="icon-btn" text="⏭" />
+                <Button fx:id="prevButton" onAction="#onBtnPrevious" styleClass="icon-btn" text="⏮" />
+                <Button fx:id="playPauseButton" onAction="#onBtnPlayPause" styleClass="play-btn" text="⏸" />
+                <Button fx:id="nextButton" onAction="#onBtnNext" styleClass="icon-btn" text="⏭" />
             </HBox>
 
 
@@ -54,7 +54,7 @@
             <!-- Search & Filter -->
             <HBox alignment="CENTER" spacing="8.0">
                 <TextField fx:id="filterField" prefWidth="220.0" promptText="Filter by title or artist..." styleClass="search-field" />
-                <Button fx:id="filterButton" onAction="#handleFilter" styleClass="accent-btn" text="Filter" />
+                <Button fx:id="filterButton" onAction="#onBtnFilter" styleClass="accent-btn" text="Filter" />
             </HBox>
         </HBox>
     </top>
@@ -86,9 +86,9 @@
                 </TableView>
 
                 <HBox spacing="8.0">
-                    <Button fx:id="newPlaylistButton" onAction="#handleNewPlaylist" styleClass="subtle-btn" text="New..." />
-                    <Button fx:id="editPlaylistButton" onAction="#handleEditPlaylist" styleClass="subtle-btn" text="Edit..." />
-                    <Button fx:id="deletePlaylistButton" onAction="#handleDeletePlaylist" styleClass="danger-btn" text="Delete" />
+                    <Button fx:id="newPlaylistButton" onAction="#onBtnNewPlaylist" styleClass="subtle-btn" text="New..." />
+                    <Button fx:id="editPlaylistButton" onAction="#onBtnPlaylist" styleClass="subtle-btn" text="Edit..." />
+                    <Button fx:id="deletePlaylistButton" onAction="#onBtnDeletePlaylist" styleClass="danger-btn" text="Delete" />
                 </HBox>
             </VBox>
 
@@ -107,16 +107,16 @@
                 <ListView fx:id="playlistSongsListView" styleClass="playlist-list" VBox.vgrow="ALWAYS" />
 
                 <HBox alignment="CENTER_LEFT" spacing="8.0">
-                    <Button fx:id="moveSongUpButton" onAction="#handleMoveSongUp" styleClass="subtle-btn" text="↑" />
-                    <Button fx:id="moveSongDownButton" onAction="#handleMoveSongDown" styleClass="subtle-btn" text="↓" />
+                    <Button fx:id="moveSongUpButton" onAction="#onBtnMoveSongUp" styleClass="subtle-btn" text="↑" />
+                    <Button fx:id="moveSongDownButton" onAction="#onBtnMoveSongDown" styleClass="subtle-btn" text="↓" />
                     <Region HBox.hgrow="ALWAYS" />
-                    <Button fx:id="removeSongFromPlaylistButton" onAction="#handleRemoveSongFromPlaylist" styleClass="danger-btn" text="Delete" />
+                    <Button fx:id="removeSongFromPlaylistButton" onAction="#onBtnRemoveSongFromPlaylist" styleClass="danger-btn" text="Delete" />
                 </HBox>
             </VBox>
 
 
             <VBox alignment="CENTER">
-                <Button fx:id="addSongToPlaylistButton" onAction="#handleAddSongToPlaylist" styleClass="transfer-btn" text="←" />
+                <Button fx:id="addSongToPlaylistButton" onAction="#onBtnAddSongToPlaylist" styleClass="transfer-btn" text="←" />
             </VBox>
 
 
@@ -144,9 +144,9 @@
                 </TableView>
 
                 <HBox spacing="8.0">
-                    <Button fx:id="newSongButton" onAction="#handleNewSong" styleClass="subtle-btn" text="New..." />
-                    <Button fx:id="editSongButton" onAction="#handleEditSong" styleClass="subtle-btn" text="Edit..." />
-                    <Button fx:id="deleteSongButton" onAction="#handleDeleteSong" styleClass="danger-btn" text="Delete" />
+                    <Button fx:id="newSongButton" onAction="#onBtnNewSong" styleClass="subtle-btn" text="New..." />
+                    <Button fx:id="editSongButton" onAction="#onBtnEditSong" styleClass="subtle-btn" text="Edit..." />
+                    <Button fx:id="deleteSongButton" onAction="#onBtnDeleteSong" styleClass="danger-btn" text="Delete" />
                 </HBox>
             </VBox>
         </HBox>
