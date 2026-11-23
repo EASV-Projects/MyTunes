@@ -12,6 +12,7 @@ module easvprojects.mytunes {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires jdk.compiler;
 
     opens easvprojects.mytunes to javafx.fxml;
     opens easvprojects.mytunes.gui.controller to javafx.fxml;   // added: fixes your crash
