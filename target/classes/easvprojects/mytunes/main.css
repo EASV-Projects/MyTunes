@@ -1,0 +1,298 @@
+/* Root & General Typography */
+.app-root {
+    -fx-background-color: #13161a;
+    -fx-font-family: "System", "Segoe UI", "Helvetica Neue", sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* Top Transport & Search Bar */
+.top-bar {
+    -fx-background-color: #181c21;
+    -fx-border-color: #252b33;
+    -fx-border-width: 0 0 1 0;
+}
+
+.cover-art {
+    -fx-background-color: linear-gradient(to bottom right, #26c281, #3478f6);
+    -fx-background-radius: 8px;
+}
+
+.track-title {
+    -fx-text-fill: #f0f4f8;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.track-subtitle {
+    -fx-text-fill: #8b95a5;
+    -fx-font-size: 12px;
+}
+
+.time-label, .volume-icon {
+    -fx-text-fill: #8b95a5;
+    -fx-font-size: 12px;
+}
+
+/* Transport Buttons */
+.icon-btn {
+    -fx-background-color: #252a32;
+    -fx-text-fill: #cbd5e1;
+    -fx-background-radius: 50%;
+    -fx-min-width: 34px;
+    -fx-min-height: 34px;
+    -fx-max-width: 34px;
+    -fx-max-height: 34px;
+    -fx-cursor: hand;
+}
+
+.icon-btn:hover {
+    -fx-background-color: #323944;
+    -fx-text-fill: #ffffff;
+}
+
+.play-btn {
+    -fx-background-color: #26c281;
+    -fx-text-fill: #0d1412;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 50%;
+    -fx-min-width: 42px;
+    -fx-min-height: 42px;
+    -fx-max-width: 42px;
+    -fx-max-height: 42px;
+    -fx-cursor: hand;
+}
+
+.play-btn:hover {
+    -fx-background-color: #2ed690;
+}
+
+/* Sliders */
+.seek-slider .track, .volume-slider .track {
+    -fx-background-color: #2d343e;
+    -fx-pref-height: 4px;
+    -fx-background-radius: 2px;
+}
+
+.seek-slider .thumb, .volume-slider .thumb {
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 12px;
+    -fx-pref-height: 12px;
+    -fx-background-radius: 50%;
+    -fx-cursor: hand;
+}
+
+/* Search Field & Filter Button */
+.search-field {
+    -fx-background-color: #121519;
+    -fx-text-fill: #e2e8f0;
+    -fx-prompt-text-fill: #64748b;
+    -fx-border-color: #2a313b;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 7 12 7 12;
+}
+
+.search-field:focused {
+    -fx-border-color: #26c281;
+}
+
+.accent-btn {
+    -fx-background-color: #26c281;
+    -fx-text-fill: #0b1310;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 7 16 7 16;
+    -fx-cursor: hand;
+}
+
+.accent-btn:hover {
+    -fx-background-color: #2ed690;
+}
+
+/* Three-Column Panel Cards */
+.panel-card {
+    -fx-background-color: #191d23;
+    -fx-border-color: #252b33;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.section-header {
+    -fx-text-fill: #94a3b8;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+}
+
+.section-meta {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+}
+
+
+/* TableView Styling */
+.data-table {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: #252b33;
+    -fx-border-width: 0 0 1 0;
+}
+
+.data-table .column-header, .data-table .filler {
+    -fx-background-color: transparent;
+    -fx-size: 32px;
+}
+
+.data-table .column-header .label {
+    -fx-text-fill: #7d8999;
+    -fx-font-weight: normal;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.data-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-cell-size: 38px;
+    -fx-border-color: transparent;
+}
+
+.data-table .table-row-cell:hover {
+    -fx-background-color: #21262e;
+    -fx-background-radius: 6px;
+}
+
+.data-table .table-row-cell:selected {
+    -fx-background-color: #1e3a32;
+    -fx-background-radius: 6px;
+}
+
+.data-table .table-cell {
+    -fx-text-fill: #e2e8f0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 8 0 8;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+.data-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #4ade80;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+/* ListView (Songs in Playlist) */
+.playlist-list {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.playlist-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e2e8f0;
+    -fx-padding: 8 10 8 10;
+    -fx-background-radius: 6px;
+}
+
+.playlist-list .list-cell:hover {
+    -fx-background-color: #21262e;
+}
+
+.playlist-list .list-cell:selected {
+    -fx-background-color: #1e3a32;
+    -fx-text-fill: #4ade80;
+}
+
+/* Action & Transfer Buttons */
+.subtle-btn {
+    -fx-background-color: #232830;
+    -fx-text-fill: #e2e8f0;
+    -fx-background-radius: 8px;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+
+.subtle-btn:hover {
+    -fx-background-color: #2e3540;
+}
+
+.danger-btn {
+    -fx-background-color: #282328;
+    -fx-text-fill: #f87171;
+    -fx-background-radius: 8px;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+
+.danger-btn:hover {
+    -fx-background-color: #3a272b;
+}
+
+.transfer-btn {
+    -fx-background-color: #22272f;
+    -fx-text-fill: #26c281;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-min-width: 38px;
+    -fx-min-height: 38px;
+    -fx-cursor: hand;
+}
+
+.transfer-btn:hover {
+    -fx-background-color: #2c333d;
+}
+
+/* Clean Dark Scrollbars */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #2f3640;
+    -fx-background-radius: 4px;
+}
+.dialog-title {
+    -fx-text-fill: #f0f4f8;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.field-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 14px;
+}
+
+.category-combo {
+    -fx-background-color: #121519;
+    -fx-border-color: #2a313b;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.category-combo .cell {
+    -fx-text-fill: #e2e8f0;
+    -fx-background-color: transparent;
+}
+
+.category-combo .list-cell:hover {
+    -fx-background-color: #21262e;
+}
+
+.category-combo .list-cell:selected {
+    -fx-background-color: #1e3a32;
+    -fx-text-fill: #4ade80;
+}
+
+.category-combo .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.category-combo .arrow {
+    -fx-background-color: #94a3b8;
+}
