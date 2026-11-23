@@ -26,4 +26,7 @@ public class SongController {
 
     public void onBtnSave(ActionEvent actionEvent) {
     }
+
+    public void onBtnChooseFile(ActionEvent actionEvent) {
+    }
 }
