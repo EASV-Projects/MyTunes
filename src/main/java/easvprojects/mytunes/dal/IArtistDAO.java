@@ -1,4 +1,4 @@
 package easvprojects.mytunes.dal;
 
-public class IArtistDAO {
+public interface IArtistDAO {
 }
