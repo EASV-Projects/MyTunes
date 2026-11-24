@@ -28,9 +28,6 @@ public class SongManager {
         return songDAO.getSongs();
     }
 
-    // Get song by ID
-
-
     // Song search
     public List<Song> searchSongs(String query, SongFilter filter) throws Exception {
 
@@ -83,7 +80,7 @@ public class SongManager {
         songDAO.deleteSong(song);
     }
 
-    //Get song by id
+    //Get song
     public Song getSongById(int id) throws Exception{
         Validation.requireNonNull(id, "ID");
         return songDAO.getSongById(id);
