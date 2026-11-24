@@ -76,11 +76,17 @@ public class SongManager {
         songDAO.updateSong(song);
     }
 
-    // Delete a song by ID
+    // Delete a song by song
     public void deleteSong(Song song) throws Exception {
 
         Validation.requireNonNull(song, "Song");
 
         songDAO.deleteSong(song);
+    }
+
+    //Get song by id
+    public Song getSongById(int id) throws Exception{
+        Validation.requireNonNull(id, "ID");
+        return songDAO.getSongById(id);
     }
 }
