@@ -1,5 +1,7 @@
 package easvprojects.mytunes.gui.controller;
 
+import easvprojects.mytunes.be.Playlist;
+import easvprojects.mytunes.be.Song;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,17 +24,17 @@ public class MainController {
     @FXML private Button filterButton;
 
 
-    @FXML private TableView playlistTable;
-    @FXML private TableColumn playlistNameCol;
-    @FXML private TableColumn playlistSongsCol;
-    @FXML private TableColumn playlistTimeCol;
+    @FXML private TableView<Playlist> playlistTable;
+    @FXML private TableColumn<Playlist, String> playlistNameCol;
+    @FXML private TableColumn<Playlist, String> playlistSongsCol;
+    @FXML private TableColumn<Playlist, Integer> playlistTimeCol;
     @FXML private Button newPlaylistButton;
     @FXML private Button editPlaylistButton;
     @FXML private Button deletePlaylistButton;
 
 
     @FXML private Label selectedPlaylistLabel;
-    @FXML private ListView playlistSongsListView;
+    @FXML private ListView<Song> playlistSongsListView;
     @FXML private Button moveSongUpButton;
     @FXML private Button moveSongDownButton;
     @FXML private Button removeSongFromPlaylistButton;
@@ -42,58 +44,71 @@ public class MainController {
 
     // Column 3: All Songs
     @FXML private Label songCountLabel;
-    @FXML private TableView songTable;
-    @FXML private TableColumn songTitleCol;
-    @FXML private TableColumn songArtistCol;
-    @FXML private TableColumn songCategoryCol;
-    @FXML private TableColumn songTimeCol;
+    @FXML private TableView<Song> songTable;
+    @FXML private TableColumn<Song, String> songTitleCol;
+    @FXML private TableColumn<Song, String> songArtistCol;
+    @FXML private TableColumn<Song, String> songCategoryCol;
+    @FXML private TableColumn<Song, Integer> songTimeCol;
     @FXML private Button newSongButton;
     @FXML private Button editSongButton;
     @FXML private Button deleteSongButton;
 
 
 
-    
-
-    public void onBtnPrevious(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnPrevious(ActionEvent actionEvent) {
     }
 
-    public void onBtnPlayPause(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnPlayPause(ActionEvent actionEvent) {
     }
 
-    public void onBtnNext(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnNext(ActionEvent actionEvent) {
+        
     }
 
-    public void onBtnFilter(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnFilter(ActionEvent actionEvent) {
     }
 
-    public void onBtnNewPlaylist(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnNewPlaylist(ActionEvent actionEvent) {
     }
 
-    public void onBtnPlaylist(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnEditPlaylist(ActionEvent actionEvent) {
     }
 
-    public void onBtnDeletePlaylist(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnDeletePlaylist(ActionEvent actionEvent) {
     }
 
-    public void onBtnMoveSongUp(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnMoveSongUp(ActionEvent actionEvent) {
     }
 
-    public void onBtnMoveSongDown(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnMoveSongDown(ActionEvent actionEvent) {
     }
 
-    public void onBtnRemoveSongFromPlaylist(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnRemoveSongFromPlaylist(ActionEvent actionEvent) {
     }
 
-    public void onBtnAddSongToPlaylist(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnAddSongToPlaylist(ActionEvent actionEvent) {
     }
 
-    public void onBtnNewSong(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnNewSong(ActionEvent actionEvent) {
     }
 
-    public void onBtnEditSong(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnEditSong(ActionEvent actionEvent) {
     }
 
-    public void onBtnDeleteSong(ActionEvent actionEvent) {
+    @FXML
+    private void onBtnDeleteSong(ActionEvent actionEvent) {
     }
 }
