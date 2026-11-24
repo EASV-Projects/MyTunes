@@ -27,8 +27,14 @@ public class Song {
     public String getName(){
         return name;
     }
-    public Artist getArtist() {return artist;}
-    public Album getAlbum() {return album;}
-    public List<Genre> getGenres() {return genres;}
+    public Artist getArtist() {
+        return artist;
+    }
+    public Album getAlbum(){
+        return album;
+    }
+    public List<Genre> getGenres() {
+        return genres;
+    }
 
 }

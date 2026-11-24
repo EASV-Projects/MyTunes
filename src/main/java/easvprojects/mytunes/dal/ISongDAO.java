@@ -1,23 +1,20 @@
 package easvprojects.mytunes.dal;
 
-import easvprojects.mytunes.be.Song;
+import easvprojects.mytunes.be.*;
+
 import java.util.List;
 public interface ISongDAO {
 
     List<Song> getSongs() throws Exception;
-    Song getSongById() throws Exception;
+    Song getSongById(int id) throws Exception;
 
-    public enum SongFilter {
-        TITLE, ARTIST, GENRE, ALBUM;
-    }
+    List<Song> searchSongs(String query, SongFilter filter) throws Exception;
+    List<Song> getSongsByArtist(Artist artist) throws Exception;
+    List<Song> getSongsByAlbum(Album album) throws Exception;
+    List<Song> getSongsByGenre(Genre genre) throws Exception;
 
-    void searchSongs(String query, SongFilter filter) throws Exception;
-    List<Song> getSongsByArtist() throws Exception;
-    List<Song> getSongsByAlbum() throws Exception;
-    List<Song> getSongsByGenre() throws Exception;
-
-    void insertSong() throws Exception;
-    void updateSong() throws Exception;
-    void deleteSong() throws Exception;
+    void insertSong(Song song) throws Exception;
+    void updateSong(Song song) throws Exception;
+    void deleteSong(Song song) throws Exception;
 
 }

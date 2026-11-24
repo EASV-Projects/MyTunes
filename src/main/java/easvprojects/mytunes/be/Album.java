@@ -8,28 +8,27 @@ public class Album {
     private List<Genre> genres;
     private List<Song> songs;
 
-
-
-    public Album(String name){
-        this.name = name;
-    }
-
-    public Album(int id, String name){
-        this.name = name;
+    public Album(int id, String name, List<Genre> genre, List<Song> songs) {
         this.id = id;
+        this.name = name;
+        this.genres = genre;
+        this.songs = songs;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public List<Genre> getGenres() { return genres;}
-    public List<Song> getSongs(){ return songs;}
 
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
 
 }
-
-
