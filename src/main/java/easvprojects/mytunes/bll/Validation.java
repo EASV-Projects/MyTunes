@@ -15,6 +15,19 @@ final class Validation {
     }
 
     /**
+     * Check that {@code text} does exceed the provided length.
+     * @param text the text to check
+     * @param field what the text is, used in the error message (e.g. "Song title")
+     * @param maxLength the length to check
+     */
+    static String checkLength(String text, String field, int maxLength) {
+        if (text.length() > maxLength) {
+            throw new IllegalArgumentException(field + " must not exceed "+maxLength+" characters.");
+        }
+        return text;
+    }
+
+    /**
      * Checks that {@code text} is not null or blank and returns it trimmed.
      *
      * @param text  the text to check
@@ -34,4 +47,6 @@ final class Validation {
         }
         return value;
     }
+
+
 }
