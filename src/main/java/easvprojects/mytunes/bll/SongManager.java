@@ -29,21 +29,13 @@ public class SongManager {
     }
 
     // Get song by ID
-    public Song getSongById(int id) throws Exception {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Invalid song ID");
-        }
 
-        return songDAO.getSongById(id);
-    }
 
     // Song search
     public List<Song> searchSongs(String query, SongFilter filter)
             throws Exception {
 
-        if (query == null || query.trim().isEmpty()) {
-            throw new IllegalArgumentException("Search query cannot be empty");
-        }
+        Validation.requireNonNull(query, "Query");
 
         return songDAO.searchSongs(query, filter);
     }
@@ -64,30 +56,30 @@ public class SongManager {
     }
 
     // Insert a new song
-    public void insertSong(Song song) throws Exception {
-        if (song == null) {
-            throw new IllegalArgumentException("Song cannot be null");
-        }
+    public void createSong(String title, Artist artist, Album album, List<Genre> genres) throws Exception {
 
-        songDAO.insertSong(song);
+            Validation.requireText(title, "Title");
+            Validation.requireNonNull(artist, "Artist");
+            Validation.requireNonNull(album, "Album");
+            Validation.requireNonNull(genres, "Genres");
+
+            Song song = new Song(0, title, artist, album, genres);
+            songDAO.insertSong(song);
+
     }
 
     // Update an existing song
     public void updateSong(Song song) throws Exception {
-        if (song == null) {
-            throw new IllegalArgumentException("Song cannot be null");
-        }
+
+        Validation.requireNonNull(song, "Song");
 
         songDAO.updateSong(song);
     }
 
     // Delete a song by ID
-    public void deleteSong(int id) throws Exception {
-        Song song = songDAO.getSongById(id);
+    public void deleteSong(Song song) throws Exception {
 
-        if (song == null) {
-            throw new IllegalArgumentException("Song not found");
-        }
+        Validation.requireNonNull(song, "Song");
 
         songDAO.deleteSong(song);
     }
