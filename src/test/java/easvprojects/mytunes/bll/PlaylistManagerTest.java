@@ -4,6 +4,8 @@ import easvprojects.mytunes.be.Genre;
 import easvprojects.mytunes.be.Playlist;
 import easvprojects.mytunes.be.Song;
 import easvprojects.mytunes.be.SongFilter;
+import easvprojects.mytunes.dal.db.GenreDAO;
+import easvprojects.mytunes.dal.db.SongDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,14 +28,21 @@ class PlaylistManagerTest extends ManagerTest {
     void setUp() throws Exception {
         playlistManager = new PlaylistManager(db);
 
+        // Test data goes straight in through the DAOs: SongManager.createSong
+        // requires an artist and album, which these tests don't need.
+        GenreDAO genreDAO = new GenreDAO(db);
+        genreDAO.insertGenre(new Genre(0, "Rock"));
+        genreDAO.insertGenre(new Genre(0, "Jazz"));
+        rock = genreDAO.searchGenres("Rock").get(0);
+        jazz = genreDAO.searchGenres("Jazz").get(0);
 
-        SongManager songManager = new SongManager(db);
-        songManager.createSong("A", null, null, List.of(rock));
-        songManager.createSong("B", null, null, null);
-        songManager.createSong("C", null, null, null);
-        a = songManager.searchSongs("A", SongFilter.TITLE).get(0);
-        b = songManager.searchSongs("B", SongFilter.TITLE).get(0);
-        c = songManager.searchSongs("C", SongFilter.TITLE).get(0);
+        SongDAO songDAO = new SongDAO(db);
+        songDAO.insertSong(new Song(0, "A", null, null, List.of(rock)));
+        songDAO.insertSong(new Song(0, "B", null, null, List.of()));
+        songDAO.insertSong(new Song(0, "C", null, null, List.of()));
+        a = songDAO.searchSongs("A", SongFilter.TITLE).get(0);
+        b = songDAO.searchSongs("B", SongFilter.TITLE).get(0);
+        c = songDAO.searchSongs("C", SongFilter.TITLE).get(0);
 
         playlistManager.createPlaylist("Mix", "My mix");
         mix = playlistManager.getAllPlaylists().get(0);
@@ -41,7 +50,7 @@ class PlaylistManagerTest extends ManagerTest {
 
     /** Returns the titles on the mix playlist, in order. */
     private List<String> titlesOnMix() throws Exception {
-        return playlistManager.getSongsOnPlaylist(mix).stream().map(Song::getTitle).toList();
+        return playlistManager.getSongsOnPlaylist(mix).stream().map(Song::getName).toList();
     }
 
     /** Puts A, B, C on the mix playlist, in that order. */
