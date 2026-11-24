@@ -32,8 +32,7 @@ public class SongManager {
 
 
     // Song search
-    public List<Song> searchSongs(String query, SongFilter filter)
-            throws Exception {
+    public List<Song> searchSongs(String query, SongFilter filter) throws Exception {
 
         Validation.requireNonNull(query, "Query");
 
