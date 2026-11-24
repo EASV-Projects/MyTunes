@@ -60,8 +60,7 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public List<Playlist> getAllPlaylists() throws Exception {
-        return List.of();
-        //playlistDAO.getPlaylists();
+        return playlistDAO.getPlaylists();
     }
 
     /**
@@ -72,7 +71,17 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public List<Playlist> searchPlaylists(String query) throws Exception {
-        return List.of();
+        List<Playlist> allPlaylists = getAllPlaylists();
+        List<Playlist> results = new ArrayList<Playlist>();
+        if(Validation.isBlank(query)){
+            return allPlaylists;
+        }
+        for(Playlist playlist : allPlaylists){
+            if(playlist.getName().toLowerCase().contains(query)){
+                results.add(playlist);
+            }
+        }
+        return results;
     }
 
     /**
@@ -83,7 +92,8 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public List<Playlist> getPlaylistsByGenre(Genre genre) throws Exception {
-        return List.of();
+        Validation.requireNonNull(genre, "Genre");
+        return playlistDAO.getPlaylistsByGenre(genre);
     }
 
     /**
@@ -94,7 +104,8 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public List<Playlist> getPlaylistsBySong(Song song) throws Exception {
-        return List.of();
+        Validation.requireNonNull(song, "Song");
+        return playlistDAO.getPlaylistsBySong(song);
     }
 
     /**
@@ -105,7 +116,8 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public List<Song> getSongsOnPlaylist(Playlist playlist) throws Exception {
-        return List.of();
+        Validation.requireNonNull(playlist, "Playlist");
+        return playlistDAO.getSongsOnPlaylist(playlist);
     }
 
     /**
@@ -117,7 +129,9 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void updatePlaylist(Playlist playlist) throws Exception {
-
+        Validation.requireNonNull(playlist, "Playlist");
+        Validation.requireText(playlist.getName(),"Playlist name");
+        playlistDAO.updatePlaylist(playlist);
     }
 
     /**
@@ -131,7 +145,9 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void moveSong(Playlist playlist, int fromPosition, int toPosition) throws Exception {
-
+        Validation.requireNonNull(playlist, "Playlist");
+        int playlistSize = playlist.getSongs().size();
+        Validation.requireValidPosition(fromPosition,playlistSize);
     }
 
     /**
@@ -170,6 +186,8 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void removeSongFromPlaylist(Playlist playlist, int position) throws Exception {
-
+        Validation.requireNonNull(playlist,"Playlist");
+        Validation.requireValidPosition(position, playlistDAO.getSongsOnPlaylist(playlist).size());
+        playlistDAO.removeSongFromPlaylist(playlist, position);
     }
 }

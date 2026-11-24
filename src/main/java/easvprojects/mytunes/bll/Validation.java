@@ -11,6 +11,7 @@ final class Validation {
     }
 
     static boolean isBlank(String text) {
+
         return text == null || text.trim().strip().isBlank();
     }
 
@@ -46,6 +47,14 @@ final class Validation {
             throw new IllegalArgumentException(field + " must not be null.");
         }
         return value;
+    }
+
+    /** Checks that {@code position} points at an entry on a playlist with {@code size} entries. */
+     static void requireValidPosition(int position, int size) {
+        if (position < 0 || position >= size) {
+            throw new IllegalArgumentException(
+                    "Position " + position + " is not on the playlist (it has " + size + " songs).");
+        }
     }
 
 
