@@ -20,10 +20,12 @@ CREATE TABLE IF NOT EXISTS album (
 
 -- be/Song: id, title, artist, album (genres come from song_genre)
 CREATE TABLE IF NOT EXISTS song (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    title     TEXT    NOT NULL,
-    artist_id INTEGER REFERENCES artist (id) ON DELETE SET NULL,
-    album_id  INTEGER REFERENCES album (id)  ON DELETE SET NULL
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    title           TEXT    NOT NULL,
+    artist_id       INTEGER REFERENCES artist (id) ON DELETE SET NULL,
+    album_id        INTEGER REFERENCES album (id)  ON DELETE SET NULL,
+    lenght_seconds  INTEGER,
+    file_path       TEXT
 );
 
 -- be/Playlist: id, name, description (songs come from playlist_song)
