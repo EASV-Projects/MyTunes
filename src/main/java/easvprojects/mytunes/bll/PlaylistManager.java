@@ -5,12 +5,10 @@ import easvprojects.mytunes.be.Playlist;
 import easvprojects.mytunes.be.Song;
 import easvprojects.mytunes.dal.IDBConnector;
 import easvprojects.mytunes.dal.IPlaylistDAO;
-import easvprojects.mytunes.dal.ISongDAO;
 import easvprojects.mytunes.dal.db.PlaylistDAO;
-import easvprojects.mytunes.dal.db.SongDAO;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class PlaylistManager implements IPlaylistManager {
 
@@ -76,6 +74,7 @@ public class PlaylistManager implements IPlaylistManager {
         if(Validation.isBlank(query)){
             return allPlaylists;
         }
+        query = query.strip().toLowerCase(Locale.ROOT);
         for(Playlist playlist : allPlaylists){
             if(playlist.getName().toLowerCase().contains(query)){
                 results.add(playlist);
@@ -146,8 +145,13 @@ public class PlaylistManager implements IPlaylistManager {
     @Override
     public void moveSong(Playlist playlist, int fromPosition, int toPosition) throws Exception {
         Validation.requireNonNull(playlist, "Playlist");
-        int playlistSize = playlist.getSongs().size();
+        int playlistSize = getSongsOnPlaylist(playlist).size();
         Validation.requireValidPosition(fromPosition,playlistSize);
+        Validation.requireValidPosition(toPosition, playlistSize);
+        playlistDAO.moveSong(playlist, fromPosition, toPosition);
+        if(fromPosition==toPosition){
+            return;
+        }
     }
 
     /**
@@ -160,7 +164,13 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void moveSongUp(Playlist playlist, int position) throws Exception {
-
+        Validation.requireNonNull(playlist, "Playlist");
+        int playlistSize = getSongsOnPlaylist(playlist).size();
+        Validation.requireValidPosition(position, playlistSize);
+        if(position == 0){
+            return;
+        }
+        playlistDAO.moveSong(playlist, position, position-1);
     }
 
     /**
@@ -173,7 +183,13 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void moveSongDown(Playlist playlist, int position) throws Exception {
-
+        Validation.requireNonNull(playlist, "Playlist");
+        int playlistSize = getSongsOnPlaylist(playlist).size();
+        Validation.requireValidPosition(position, playlistSize);
+        if(position + 1 == playlistSize){
+            return;
+        }
+        playlistDAO.moveSong(playlist, position, position+1);
     }
 
     /**
