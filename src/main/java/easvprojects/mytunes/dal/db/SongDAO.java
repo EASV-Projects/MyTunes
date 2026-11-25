@@ -8,18 +8,23 @@ import easvprojects.mytunes.dal.ISongDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.Duration;
+import java.nio.file.Path;
 
 public class SongDAO implements ISongDAO {
 
     // SQL queries against the song and song_genre tables (see schema.sql)
     // Every song query starts from SELECT_SONG, which joins in the artist and album names.
     private static final String SELECT_SONG =
-            "SELECT s.id, s.title, s.artist_id, ar.name AS artist_name, s.album_id, al.name AS album_name " +
-            "FROM song s " +
-            "LEFT JOIN artist ar ON ar.id = s.artist_id " +
-            "LEFT JOIN album al ON al.id = s.album_id";
+            "SELECT s.id, s.title, s.artist_id, ar.name AS artist_name, s.album_id, al.name AS album_name, " +
+                    "s.length_seconds, s.file_path " +
+                    "FROM song s " +
+                    "LEFT JOIN artist ar ON ar.id = s.artist_id " +
+                    "LEFT JOIN album al ON al.id = s.album_id";
 
-    private static final String INSERT_SONG = "INSERT INTO song (title, artist_id, album_id) VALUES (?, ?, ?)";
+    private static final String INSERT_SONG = "INSERT INTO song (title, artist_id, album_id, length_seconds, file_path) VALUES (?, ?, ?, ?, ?)";
+
+
     private static final String INSERT_SONG_GENRE = "INSERT INTO song_genre (song_id, genre_id) VALUES (?, ?)";
 
     private static final String SELECT_ALL_SONGS = SELECT_SONG + " ORDER BY s.title";
@@ -39,7 +44,7 @@ public class SongDAO implements ISongDAO {
     private static final String SELECT_GENRES_FOR_SONG =
             "SELECT g.id, g.name FROM genre g JOIN song_genre sg ON sg.genre_id = g.id WHERE sg.song_id = ? ORDER BY g.name";
 
-    private static final String UPDATE_SONG = "UPDATE song SET title = ?, artist_id = ?, album_id = ? WHERE id = ?";
+    private static final String UPDATE_SONG = "UPDATE song SET title = ?, artist_id = ?, album_id = ?, length_seconds = ?, file_path = ? WHERE id = ?";
     private static final String DELETE_SONG_GENRES = "DELETE FROM song_genre WHERE song_id = ?";
 
     private static final String DELETE_SONG = "DELETE FROM song WHERE id = ?";
@@ -64,6 +69,10 @@ public class SongDAO implements ISongDAO {
                 try (PreparedStatement ps = c.prepareStatement(INSERT_SONG, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setString(1, song.getName());
                     setArtistAndAlbum(ps, 2, song);
+                    ps.setString(1, song.getName());
+                    setArtistAndAlbum(ps, 2, song);
+                    setLength(ps, 4, song);
+                    setFilePath(ps, 5, song);
                     ps.executeUpdate();
                     try (ResultSet keys = ps.getGeneratedKeys()) {
                         keys.next();
@@ -142,7 +151,9 @@ public class SongDAO implements ISongDAO {
                 try (PreparedStatement ps = c.prepareStatement(UPDATE_SONG)) {
                     ps.setString(1, song.getName());
                     setArtistAndAlbum(ps, 2, song);
-                    ps.setInt(4, song.getId());
+                    setLength(ps, 4, song);
+                    setFilePath(ps, 5, song);
+                    ps.setInt(6, song.getId());
                     ps.executeUpdate();
                 }
                 // Replace the song's genres with the ones it has now
@@ -169,7 +180,9 @@ public class SongDAO implements ISongDAO {
         }
     }
 
-    /** Runs a song query that takes one int parameter and returns the songs. */
+    /**
+     * Runs a song query that takes one int parameter and returns the songs.
+     */
     private List<Song> getSongsWhereIdIs(String sql, int id) throws Exception {
         try (Connection c = dbConnector.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
@@ -178,7 +191,9 @@ public class SongDAO implements ISongDAO {
         }
     }
 
-    /** Runs {@code ps} and turns every row into a Song, including its genres. */
+    /**
+     * Runs {@code ps} and turns every row into a Song, including its genres.
+     */
     private List<Song> readSongs(Connection c, PreparedStatement ps) throws SQLException {
         List<Song> songs = new ArrayList<>();
         try (ResultSet rs = ps.executeQuery()) {
@@ -197,14 +212,28 @@ public class SongDAO implements ISongDAO {
                 if (!rs.wasNull()) {
                     album = new Album(albumId, rs.getString("album_name"), new ArrayList<>(), new ArrayList<>());
                 }
+                Duration length = null;
+                long seconds = rs.getLong("length_seconds");
+                if (!rs.wasNull()) {
+                    length = Duration.ofSeconds(seconds);
+                }
 
-                songs.add(new Song(id, rs.getString("title"), artist, album, readGenres(c, id)));
+                Path filePath = null;
+                String path = rs.getString("file_path");
+                if (path != null) {
+                    filePath = Path.of(path);
+                }
+
+                songs.add(new Song(id, rs.getString("title"), artist, album, readGenres(c, id), length, filePath));
+
             }
         }
         return songs;
     }
 
-    /** Returns the genres of one song. */
+    /**
+     * Returns the genres of one song.
+     */
     private List<Genre> readGenres(Connection c, int songId) throws SQLException {
         List<Genre> genres = new ArrayList<>();
         try (PreparedStatement ps = c.prepareStatement(SELECT_GENRES_FOR_SONG)) {
@@ -218,7 +247,9 @@ public class SongDAO implements ISongDAO {
         return genres;
     }
 
-    /** Links a song to each of the given genres. */
+    /**
+     * Links a song to each of the given genres.
+     */
     private void insertGenres(Connection c, int songId, List<Genre> genres) throws SQLException {
         if (genres == null) return;
         try (PreparedStatement ps = c.prepareStatement(INSERT_SONG_GENRE)) {
@@ -230,12 +261,24 @@ public class SongDAO implements ISongDAO {
         }
     }
 
-    /** Sets the artist id and album id parameters, or NULL when the song has none. */
+    /**
+     * Sets the artist id and album id parameters, or NULL when the song has none.
+     */
     private void setArtistAndAlbum(PreparedStatement ps, int firstIndex, Song song) throws SQLException {
         if (song.getArtist() != null) ps.setInt(firstIndex, song.getArtist().getId());
         else ps.setNull(firstIndex, Types.INTEGER);
 
         if (song.getAlbum() != null) ps.setInt(firstIndex + 1, song.getAlbum().getId());
         else ps.setNull(firstIndex + 1, Types.INTEGER);
+    }
+
+    private void setLength(PreparedStatement ps, int index, Song song) throws SQLException {
+        if (song.getLength() != null) ps.setLong(index, song.getLength().getSeconds());
+        else ps.setNull(index, Types.INTEGER);
+    }
+
+    private void setFilePath(PreparedStatement ps, int index, Song song) throws SQLException {
+        if (song.getFilePath() != null) ps.setString(index, song.getFilePath().toString());
+        else ps.setNull(index, Types.VARCHAR);
     }
 }
