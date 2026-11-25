@@ -14,9 +14,11 @@ import javafx.stage.Stage;
 
 public class SongController {
     @FXML
+    private Label errorLabel;
+    @FXML
     private BorderPane dialogRoot;
     @FXML
-    private Label titleLabel;
+    private Label headerLabel;
     @FXML
     private TextField titleField;
     @FXML
@@ -34,89 +36,23 @@ public class SongController {
     @FXML
     private Button saveButton;
 
-    private Song editingSong;
-    private Song resultSong;
-    private boolean saved = false;
-
-    public void setSong(Song song) {
-        if (song != null) {
-            if (titleLabel != null)
-                titleLabel.setText("Edit Song");
-            if (titleField != null)
-                titleField.setText(nullToEmpty(song.getName()));
-            ;
-            //setComboValue(song.getGenres());
-
-        } else {
-            if (titleLabel != null)
-                titleLabel.setText("New Song");
-            if (titleField != null)
-                titleField.clear();
-            if (artistField != null)
-                artistField.clear();
-            if (timeField != null)
-                timeField.clear();
-        }
-    }
-
-    public void setArtist(Artist artist) {
-        if (artistField != null)
-            artistField.setText(nullToEmpty(artist.getName()));
-        else {
-            if (artistField != null)
-                artistField.clear();
-        }
-    }
-
-    public boolean isSaved(){
-        return saved;
-    }
-
-    public Song getResultSong(){
-        return resultSong;
-    }
 
 
-    public void onBtnCancel(ActionEvent actionEvent) {
-        saved=false;
-        resultSong= null;
-        closeDialog();
-    }
-
-    private void closeDialog(){
-        if(titleField != null&& titleField.getScene() !=null){
-            Stage stage =(Stage) titleField.getScene().getWindow();
-            stage.close();
-        }
+    @FXML
+    private void onBtnCancel(ActionEvent actionEvent) {
 
     }
 
-    private String nullToEmpty(String text){
-        return text == null? "":text;
-    }
 
-    public void onBtnSave(ActionEvent actionEvent) {
-        String title = getText(titleField);
-        String artist = getText(artistField);
-        String time = getText(timeField);
-        if (title.isEmpty()){
-            showError("Title is required");
-            return;
-        }
-        if (artist.isEmpty()){
-            showError("Artist is required");
-        }
-    }
+    @FXML
+    private void onBtnSave(ActionEvent actionEvent) {
 
-    private String getText(TextField field){
-        return field == null || field.getText()==null
-                ? field.getText().trim() : "";
-    }
-
-    private void showError(String msg){
     }
 
 
-    public void onBtnChooseFile(ActionEvent actionEvent) {
+
+
+    @FXML
+    private void onBtnChooseFile(ActionEvent actionEvent) {
     }
 }

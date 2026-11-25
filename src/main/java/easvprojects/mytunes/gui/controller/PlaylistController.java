@@ -11,63 +11,29 @@ import javafx.stage.Stage;
 
 public class PlaylistController {
     @FXML
+    private BorderPane dialogRoot;
+    @FXML
+    private Label errorLabel;
+    @FXML
     private Button cancelButton;
     @FXML
     private Button saveButton;
     @FXML
-    private Label titleLabel;
+    private Label headerLabel;
     @FXML
     private TextField nameField;
 
-    private boolean saved = false;
-    private String playlistName;
 
-
-    public void setPlaylist(Playlist playlist) {
-        if (playlist != null) {
-            if (titleLabel != null)
-                titleLabel.setText("Edit Playlist");
-            if (nameField != null)
-                nameField.setText(nullToEmpty(playlist.getName()));
-        } else {
-            if (titleLabel != null)
-                titleLabel.setText("New Playlist");
-            if (nameField != null)
-                nameField.clear();
-        }
+    @FXML
+    private void onBtnCancel(ActionEvent actionEvent) {
 
     }
 
-    public boolean isSaved() {
-        return saved;
-    }
 
-    public String getPlaylistName() {
-        return playlistName;
-    }
+    @FXML
+    private void onBtnSave(ActionEvent actionEvent) {
 
-
-    public void onBtnCancel(ActionEvent actionEvent) {
-        saved = false;
-        closeDialog();
-    }
-
-    private void closeDialog() {
-        if (nameField != null && nameField.getScene() != null) {
-            Stage stage = (Stage) nameField.getScene().getWindow();
-            stage.close();
-        }
-
-    }
-
-    public void onBtnSave(ActionEvent actionEvent) {
-        String name = nameField != null && nameField.getText() != null
-                ? nameField.getText().trim() : "";
-    }
-
-
-    private String nullToEmpty(String text) {
-        return text == null ? "" : text;
     }
 
 }
+
