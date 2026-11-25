@@ -69,18 +69,10 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public List<Playlist> searchPlaylists(String query) throws Exception {
-        List<Playlist> allPlaylists = getAllPlaylists();
-        List<Playlist> results = new ArrayList<Playlist>();
         if(Validation.isBlank(query)){
-            return allPlaylists;
+            return getAllPlaylists();
         }
-        query = query.strip().toLowerCase(Locale.ROOT);
-        for(Playlist playlist : allPlaylists){
-            if(playlist.getName().toLowerCase().contains(query)){
-                results.add(playlist);
-            }
-        }
-        return results;
+        return playlistDAO.getPlaylistByName(query.trim());
     }
 
     /**
@@ -148,10 +140,10 @@ public class PlaylistManager implements IPlaylistManager {
         int playlistSize = getSongsOnPlaylist(playlist).size();
         Validation.requireValidPosition(fromPosition,playlistSize);
         Validation.requireValidPosition(toPosition, playlistSize);
-        playlistDAO.moveSong(playlist, fromPosition, toPosition);
         if(fromPosition==toPosition){
             return;
         }
+        playlistDAO.moveSong(playlist, fromPosition, toPosition);
     }
 
     /**
@@ -164,13 +156,10 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void moveSongUp(Playlist playlist, int position) throws Exception {
-        Validation.requireNonNull(playlist, "Playlist");
-        int playlistSize = getSongsOnPlaylist(playlist).size();
-        Validation.requireValidPosition(position, playlistSize);
         if(position == 0){
             return;
         }
-        playlistDAO.moveSong(playlist, position, position-1);
+        this.moveSong(playlist, position, position-1);
     }
 
     /**
@@ -183,13 +172,12 @@ public class PlaylistManager implements IPlaylistManager {
      */
     @Override
     public void moveSongDown(Playlist playlist, int position) throws Exception {
-        Validation.requireNonNull(playlist, "Playlist");
         int playlistSize = getSongsOnPlaylist(playlist).size();
         Validation.requireValidPosition(position, playlistSize);
         if(position + 1 == playlistSize){
             return;
         }
-        playlistDAO.moveSong(playlist, position, position+1);
+        this.moveSong(playlist, position, position+1);
     }
 
     /**
