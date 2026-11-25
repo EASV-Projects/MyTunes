@@ -1,6 +1,7 @@
 package easvprojects.mytunes.bll;
 
 import easvprojects.mytunes.be.Album;
+import easvprojects.mytunes.be.Genre;
 import easvprojects.mytunes.dal.IAlbumDAO;
 import easvprojects.mytunes.dal.IDBConnector;
 import easvprojects.mytunes.dal.db.AlbumDAO;
@@ -13,6 +14,7 @@ public class AlbumManager {
 
     // Constructor using database connector
     public AlbumManager(IDBConnector db) {
+
         this.albumDAO = new AlbumDAO(db);
     }
 
@@ -21,9 +23,10 @@ public class AlbumManager {
         this.albumDAO = albumDAO;
     }
 
-    public void createAlbum(Album album) throws Exception{
-        Validation.requireNonNull(album, "Album");
-        Validation.requireText(album.getName(), "Album name");
+    public void createAlbum(String name, ArrayList<Genre> genres ) throws Exception{
+        String validName = Validation.requireText(name, "Album name");
+        ArrayList <Genre> validGenre = Validation.requireNonNull(genres, "Genres");
+        Album album = new Album(0, validName, validGenre, new ArrayList<>());
         albumDAO.insertAlbum(album);
     }
 // return all albums
@@ -37,16 +40,22 @@ public class AlbumManager {
         albumDAO.updateAlbum(album);
     }
 // get album by name
-    public List<Album> getAlbumsByName(String name) throws Exception{
+    public List<Album> searchAlbum(String name) throws Exception{
         Validation.requireText(name, "Album name");
         return albumDAO.getAlbumsByName(name);
     }
- //deleting album by id
-    public void deleteAlbum(int id) throws Exception{
-        if(id < 0 || id > getAllAlbums().size()){
-            return;
-        }
-        albumDAO.deleteAlbum(id);
+//get album by id
+    public Album getAlbumById(int id) throws Exception{
+        return albumDAO.getAlbumById(id);
     }
 
+// get album by genre
+    public List<Album> getAlbumsByGenre(Genre genre) throws Exception{
+        Validation.requireNonNull(genre, "Genre");
+        return albumDAO.getAlbumsByGenre(genre);
+    }
+ //deleting album by id
+    public void deleteAlbum(Album album) throws Exception{
+        albumDAO.deleteAlbum(album.getId());
+    }
 }
