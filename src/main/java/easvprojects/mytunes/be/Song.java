@@ -1,6 +1,8 @@
 package easvprojects.mytunes.be;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.time.Duration;
 
 public class Song {
     private int id;
@@ -8,6 +10,9 @@ public class Song {
     private Artist artist;
     private Album album;
     private List<Genre> genres;
+    private Duration length;
+    private Path filePath;
+
 
     public Song(String name){
         this.name = name;
@@ -19,6 +24,17 @@ public class Song {
         this.artist = artist;
         this.album = album;
         this.genres = genres;
+
+    }
+
+    public Song(int id, String name, Artist artist, Album album, List<Genre> genres, Duration length, Path filePath){
+        this.id = id;
+        this.name = name;
+        this.artist = artist;
+        this.album = album;
+        this.genres = genres;
+        this.length = length;
+        this.filePath = filePath;
     }
 
     public int getId(){
@@ -35,6 +51,12 @@ public class Song {
     }
     public List<Genre> getGenres() {
         return genres;
+    }
+    public Duration getLength(){
+        return length;
+    }
+    public Path getFilePath(){
+        return filePath;
     }
 
 }
