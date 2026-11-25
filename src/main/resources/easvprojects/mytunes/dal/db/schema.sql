@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS song (
     title           TEXT    NOT NULL,
     artist_id       INTEGER REFERENCES artist (id) ON DELETE SET NULL,
     album_id        INTEGER REFERENCES album (id)  ON DELETE SET NULL,
-    lenght_seconds  INTEGER,
+    length_seconds  INTEGER,
     file_path       TEXT
 );
 
