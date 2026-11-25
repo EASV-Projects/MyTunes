@@ -22,14 +22,15 @@ public class GenreManager {
     }
 
     // Get all genres
-    public List<Genre> getGenres() throws Exception {
+    public List<Genre> getAllGenres() throws Exception {
         return genreDAO.getGenres();
     }
 
     // Genre search
     public List<Genre> searchGenres(String query) throws Exception {
-
-        Validation.requireNonNull(query, "Query");
+        if (Validation.isBlank(query)){
+            return genreDAO.getGenres();
+        }
 
         return genreDAO.searchGenres(query);
     }
