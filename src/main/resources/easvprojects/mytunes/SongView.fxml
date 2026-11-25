@@ -63,7 +63,6 @@
                     <RowConstraints />
                 </rowConstraints>
             </GridPane>
-            <Label fx:id="errorLabel" style="-fx-text-fill: #ef4444;" />
 
         </VBox>
     </center>
