@@ -13,20 +13,6 @@ public class Song {
     private Duration length;
     private Path filePath;
 
-
-    public Song(String name){
-        this.name = name;
-    }
-
-    public Song(int id, String name, Artist artist, Album album, List<Genre> genres){
-        this.id = id;
-        this.name = name;
-        this.artist = artist;
-        this.album = album;
-        this.genres = genres;
-
-    }
-
     public Song(int id, String name, Artist artist, Album album, List<Genre> genres, Duration length, Path filePath){
         this.id = id;
         this.name = name;
