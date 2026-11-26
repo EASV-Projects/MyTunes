@@ -7,6 +7,8 @@ import easvprojects.mytunes.dal.IDBConnector;
 import easvprojects.mytunes.dal.db.SongDAO;
 import easvprojects.mytunes.be.SongFilter;
 
+import java.nio.file.Path;
+import java.time.Duration;
 import java.util.List;
 
 public class SongManager {
@@ -52,14 +54,16 @@ public class SongManager {
     }
 
     // Insert a new song
-    public void createSong(String title, Artist artist, Album album, List<Genre> genres) throws Exception {
+    public void createSong(String title, Artist artist, Album album, List<Genre> genres, Duration length, Path filePath) throws Exception {
 
             Validation.requireText(title, "Title");
             Validation.requireNonNull(artist, "Artist");
             Validation.requireNonNull(album, "Album");
             Validation.requireNonNull(genres, "Genres");
+            Validation.requireNonNull(length, "Length");
+            Validation.requireNonNull(filePath, "File path");
 
-            Song song = new Song(0, title, artist, album, genres);
+            Song song = new Song(0, title, artist, album, genres, length, filePath);
             songDAO.insertSong(song);
 
     }
