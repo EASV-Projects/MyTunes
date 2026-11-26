@@ -49,6 +49,7 @@ public class PlaylistDAO implements IPlaylistDAO {
             "UPDATE playlist_song SET position = position + 1 WHERE playlist_id = ? AND position >= ? AND position < ?";
 
     private static final String DELETE_ENTRY = "DELETE FROM playlist_song WHERE id = ?";
+    private static final String DELETE_PLAYLIST = "DELETE FROM playlist WHERE id = ?";
 
     private final IDBConnector dbConnector;
     private final SongDAO songDAO;
@@ -210,6 +211,15 @@ public class PlaylistDAO implements IPlaylistDAO {
             ps.setInt(1, playlistId);
             ps.setInt(2, from);
             ps.setInt(3, to);
+            ps.executeUpdate();
+        }
+    }
+    /** Delete playlist from all playlists */
+    @Override
+    public void deletePlaylistfromPlaylists(int id) throws Exception{
+        try (Connection c = dbConnector.getConnection();
+        PreparedStatement ps = c.prepareStatement(DELETE_PLAYLIST)){
+            ps.setInt(1, id);
             ps.executeUpdate();
         }
     }
