@@ -61,6 +61,11 @@ CREATE TABLE IF NOT EXISTS playlist_song (
     position    INTEGER NOT NULL
 );
 
+-- Songs.FavoriteSongs(one-to-many)
+CREATE TABLE IF NOT EXISTS favorite_songs(
+    song_id INTEGER PRIMARY KEY REFERENCES song(id) ON DELETE CASCADE
+);
+
 -- Indexes for the lookups the DAOs expose
 CREATE INDEX IF NOT EXISTS idx_song_artist         ON song (artist_id);
 CREATE INDEX IF NOT EXISTS idx_song_album          ON song (album_id);
