@@ -71,7 +71,7 @@ public class SongManager {
     // Update an existing song
     public void updateSong(Song song) throws Exception {
 
-        Validation.requireNonNull(song, "Song");
+        Validation.requireText(song.getName(), "Song title");
 
         songDAO.updateSong(song);
     }
