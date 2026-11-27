@@ -4,6 +4,7 @@ import easvprojects.mytunes.be.Song;
 import easvprojects.mytunes.dal.IDBConnector;
 import easvprojects.mytunes.dal.IFavoriteSongsDAO;
 import easvprojects.mytunes.dal.db.FavoriteSongsDAO;
+import org.controlsfx.validation.ValidateEvent;
 
 import java.util.List;
 
@@ -31,5 +32,9 @@ public class FavoriteSongsManager {
 
     public List<Song> getFavotiteSongs() throws Exception{
         return favoriteSongsDAO.getFavoriteSongs();
+    }
+    private boolean isFavoriteSong(Song song) throws Exception{
+        Validation.requireNonNull(song,"Song");
+        return favoriteSongsDAO.isFavoriteSong(song);
     }
 }
