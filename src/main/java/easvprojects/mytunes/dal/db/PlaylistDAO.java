@@ -216,7 +216,7 @@ public class PlaylistDAO implements IPlaylistDAO {
     }
     /** Delete playlist from all playlists */
     @Override
-    public void deletePlaylistfromPlaylists(int id) throws Exception{
+    public void deletePlaylist(int id) throws Exception{
         try (Connection c = dbConnector.getConnection();
         PreparedStatement ps = c.prepareStatement(DELETE_PLAYLIST)){
             ps.setInt(1, id);
