@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface IFavoriteSongsDAO {
 
-    void addSongToFavorite(Song song) throws Exception;
+    void addFavoriteSong(Song song) throws Exception;
 
-    void removeSongFromFavorite(int id) throws Exception;
+    void removeFavoriteSong(int id) throws Exception;
 
-    List<Song> getSongsOnFavoritePlaylist() throws Exception;
+    List<Song> getFavoriteSongs() throws Exception;
 
-    boolean isFavorite(Song song) throws Exception;
+    boolean isFavoriteSong(Song song) throws Exception;
 
 
 

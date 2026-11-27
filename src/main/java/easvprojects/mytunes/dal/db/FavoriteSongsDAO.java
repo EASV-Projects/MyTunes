@@ -30,7 +30,7 @@ public class FavoriteSongsDAO implements IFavoriteSongsDAO {
 
 
     @Override
-    public void addSongToFavorite(Song song) throws Exception {
+    public void addFavoriteSong(Song song) throws Exception {
         try(Connection c = dbConnector.getConnection();
             PreparedStatement ps = c.prepareStatement(INSERT_SONG)){
             ps.setInt(1, song.getId());
@@ -39,7 +39,7 @@ public class FavoriteSongsDAO implements IFavoriteSongsDAO {
     }
 
     @Override
-    public void removeSongFromFavorite(int id) throws Exception {
+    public void removeFavoriteSong(int id) throws Exception {
         try(Connection c = dbConnector.getConnection();  // connecting sql
             PreparedStatement ps = c.prepareStatement(DELETE_SONG)){  //adding prepare command
             ps.setInt(1, id); // replace ? with song id
@@ -48,7 +48,7 @@ public class FavoriteSongsDAO implements IFavoriteSongsDAO {
     }
 
     @Override
-    public List<Song> getSongsOnFavoritePlaylist() throws Exception {
+    public List<Song> getFavoriteSongs() throws Exception {
         List<Song> allSongs = new ArrayList<>();
         try(Connection c = dbConnector.getConnection();
         PreparedStatement ps = c.prepareStatement(GET_ALL);
@@ -62,7 +62,7 @@ public class FavoriteSongsDAO implements IFavoriteSongsDAO {
     }
 
     @Override
-    public boolean isFavorite(Song song) throws Exception {
+    public boolean isFavoriteSong(Song song) throws Exception {
         try(Connection c = dbConnector.getConnection();
         PreparedStatement ps  = c.prepareStatement(IS_FAVORITE)){
             ps.setInt(1, song.getId()); //replace ? with song id
