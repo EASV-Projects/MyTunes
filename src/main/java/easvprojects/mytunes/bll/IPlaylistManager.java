@@ -113,4 +113,5 @@ public interface IPlaylistManager {
      * @throws IllegalArgumentException if the playlist is null or the position is not on the playlist
      */
     void removeSongFromPlaylist(Playlist playlist, int position) throws Exception;
+
 }

@@ -120,4 +120,6 @@ public interface IPlaylistDAO {
      */
     void moveSong(Playlist playlist, int fromPosition, int toPosition) throws Exception;
 
+    void deletePlaylist(int id) throws Exception;
+
 }

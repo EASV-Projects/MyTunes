@@ -194,4 +194,9 @@ public class PlaylistManager implements IPlaylistManager {
         Validation.requireValidPosition(position, playlistDAO.getSongsOnPlaylist(playlist).size());
         playlistDAO.removeSongFromPlaylist(playlist, position);
     }
+
+    public void deletePlaylist(Playlist playlist) throws Exception {
+        Validation.requireNonNull(playlist, "Playlist");
+        playlistDAO.deletePlaylist(playlist.getId());
+    }
 }
