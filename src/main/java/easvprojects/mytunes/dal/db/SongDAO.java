@@ -168,7 +168,8 @@ public class SongDAO implements ISongDAO {
                 }
                 insertGenres(c, song.getId(), song.getGenres());
                 c.commit();
-            } catch (SQLException e) {
+            } catch (Exception e) {
+                c.rollback();
                 throw new DataAccessException("Could not update the song.", e);
             }
         }

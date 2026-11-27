@@ -65,7 +65,8 @@ public class AlbumDAO implements IAlbumDAO {
                 }
                 insertGenres(c, albumId, album.getGenres());
                 c.commit();
-            } catch (SQLException e) {
+            }  catch (Exception e) {
+                c.rollback();
                 throw new DataAccessException("Could not insert the album", e);
 
             }

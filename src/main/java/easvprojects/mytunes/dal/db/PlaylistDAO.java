@@ -138,7 +138,8 @@ public class PlaylistDAO implements IPlaylistDAO {
                 // Close the gap: everything after the removed entry moves up one place
                 shift(c, SHIFT_ENTRIES_UP, playlist.getId(), position, Integer.MAX_VALUE);
                 c.commit();
-            }catch (SQLException e) {
+            }catch (Exception e) {
+                c.rollback();
                 throw new DataAccessException("Could not remove the song from the playlist", e);
             }
         }
@@ -165,7 +166,8 @@ public class PlaylistDAO implements IPlaylistDAO {
                     ps.executeUpdate();
                 }
                 c.commit();
-            } catch (SQLException e) {
+            } catch (Exception e) {
+                c.rollback();
                 throw new DataAccessException("Could not move the song", e);
             }
         }
