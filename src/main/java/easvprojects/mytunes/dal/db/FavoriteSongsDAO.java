@@ -26,6 +26,7 @@ public class FavoriteSongsDAO implements IFavoriteSongsDAO {
     public FavoriteSongsDAO(IDBConnector dbConnector) {
         this.dbConnector = dbConnector;
         this.songDAO = new SongDAO(dbConnector);
+
     }
 
 
@@ -49,16 +50,7 @@ public class FavoriteSongsDAO implements IFavoriteSongsDAO {
 
     @Override
     public List<Song> getFavoriteSongs() throws Exception {
-        List<Song> allSongs = new ArrayList<>();
-        try(Connection c = dbConnector.getConnection();
-        PreparedStatement ps = c.prepareStatement(GET_ALL);
-            ResultSet rs = ps.executeQuery()){
-            while (rs.next()){
-                int songId = rs.getInt("song_id");
-                allSongs.add(songDAO.getSongById(songId));
-            }
-                return allSongs;
-        }
+        return songDAO.getFavoriteSongs();
     }
 
     @Override

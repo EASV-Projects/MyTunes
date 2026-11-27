@@ -41,6 +41,7 @@ public class SongDAO implements ISongDAO {
     private static final String SELECT_SONG_BY_ID = SELECT_SONG + " WHERE s.id = ?";
     private static final String SELECT_SONGS_ON_PLAYLIST = SELECT_SONG +
             " JOIN playlist_song ps ON ps.song_id = s.id WHERE ps.playlist_id = ? ORDER BY ps.position";
+    private static final String SELECT_FAVORITE_SONGS_ON_PLAYLIST = SELECT_SONG + "JOIN favorite_songs fs ON fs.song_id = s.id";
     private static final String SELECT_GENRES_FOR_SONG =
             "SELECT g.id, g.name FROM genre g JOIN song_genre sg ON sg.genre_id = g.id WHERE sg.song_id = ? ORDER BY g.name";
 
@@ -141,6 +142,13 @@ public class SongDAO implements ISongDAO {
      */
     List<Song> getSongsOnPlaylist(int playlistId) throws Exception {
         return getSongsWhereIdIs(SELECT_SONGS_ON_PLAYLIST, playlistId);
+    }
+
+    List<Song> getFavoriteSongs() throws Exception{
+        try (Connection c = dbConnector.getConnection();
+             PreparedStatement ps = c.prepareStatement(SELECT_FAVORITE_SONGS_ON_PLAYLIST)) {
+            return readSongs(c, ps);
+        }
     }
 
     @Override
