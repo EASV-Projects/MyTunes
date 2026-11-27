@@ -48,7 +48,7 @@ public class ArtistDAO implements IArtistDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not insert the artist", e);
+            throw new DataAccessException("Could not insert the artist.", e);
         }
     }
 
@@ -66,7 +66,7 @@ public class ArtistDAO implements IArtistDAO {
             return readArtists(rs);
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve artists", e);
+            throw new DataAccessException("Could not retrieve artists.", e);
         }
     }
 
@@ -87,7 +87,7 @@ public class ArtistDAO implements IArtistDAO {
             }
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve artist", e);
+            throw new DataAccessException("Could not retrieve artist.", e);
         }
     }
 
@@ -108,7 +108,7 @@ public class ArtistDAO implements IArtistDAO {
             }
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve artist", e);
+            throw new DataAccessException("Could not retrieve artist.", e);
         }
     }
 
@@ -127,7 +127,7 @@ public class ArtistDAO implements IArtistDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not update the artist", e);
+            throw new DataAccessException("Could not update the artist.", e);
         }
     }
 
@@ -146,7 +146,7 @@ public class ArtistDAO implements IArtistDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not remove the artist", e);
+            throw new DataAccessException("Could not remove the artist.", e);
         }
     }
 

@@ -83,7 +83,7 @@ public class PlaylistDAO implements IPlaylistDAO {
             ps.setInt(3, playlist.getId());
             ps.executeUpdate();
         }catch (SQLException e) {
-            throw new DataAccessException("Could not add the song to the playlist", e);
+            throw new DataAccessException("Could not add the song to the playlist.", e);
         }
     }
 
@@ -121,7 +121,7 @@ public class PlaylistDAO implements IPlaylistDAO {
             ps.setInt(3, playlist.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DataAccessException("Could not udpate the playlist", e);
+            throw new DataAccessException("Could not update the playlist.", e);
         }
     }
 
@@ -140,7 +140,7 @@ public class PlaylistDAO implements IPlaylistDAO {
                 c.commit();
             }catch (Exception e) {
                 c.rollback();
-                throw new DataAccessException("Could not remove the song from the playlist", e);
+                throw new DataAccessException("Could not remove the song from the playlist.", e);
             }
         }
     }
@@ -168,7 +168,7 @@ public class PlaylistDAO implements IPlaylistDAO {
                 c.commit();
             } catch (Exception e) {
                 c.rollback();
-                throw new DataAccessException("Could not move the song", e);
+                throw new DataAccessException("Could not move the song.", e);
             }
         }
     }

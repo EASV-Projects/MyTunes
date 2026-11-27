@@ -41,7 +41,7 @@ public class GenreDAO implements IGenreDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not insert the genre", e);
+            throw new DataAccessException("Could not insert the genre.", e);
         }
 
     }
@@ -54,7 +54,7 @@ public class GenreDAO implements IGenreDAO {
             return readGenres(rs);
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve genres", e);
+            throw new DataAccessException("Could not retrieve genres.", e);
         }
     }
 
@@ -68,7 +68,7 @@ public class GenreDAO implements IGenreDAO {
             }
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not search for genres", e);
+            throw new DataAccessException("Could not search for genres.", e);
         }
     }
 
@@ -81,7 +81,7 @@ public class GenreDAO implements IGenreDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not update the genre", e);
+            throw new DataAccessException("Could not update the genre.", e);
         }
     }
 
@@ -93,7 +93,7 @@ public class GenreDAO implements IGenreDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not remove the genre", e);
+            throw new DataAccessException("Could not remove the genre.", e);
         }
     }
 

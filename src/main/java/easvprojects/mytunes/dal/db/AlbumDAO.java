@@ -67,7 +67,7 @@ public class AlbumDAO implements IAlbumDAO {
                 c.commit();
             }  catch (Exception e) {
                 c.rollback();
-                throw new DataAccessException("Could not insert the album", e);
+                throw new DataAccessException("Could not insert the album.", e);
 
             }
         }
@@ -80,7 +80,7 @@ public class AlbumDAO implements IAlbumDAO {
             return readAlbums(c, ps);
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve albums", e);
+            throw new DataAccessException("Could not retrieve albums.", e);
         }
     }
 
@@ -92,7 +92,7 @@ public class AlbumDAO implements IAlbumDAO {
             return readAlbums(c, ps);
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve albums", e);
+            throw new DataAccessException("Could not retrieve albums.", e);
         }
     }
 
@@ -104,7 +104,7 @@ public class AlbumDAO implements IAlbumDAO {
             return readAlbums(c, ps);
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve albums", e);
+            throw new DataAccessException("Could not retrieve albums.", e);
         }
     }
 
@@ -117,7 +117,7 @@ public class AlbumDAO implements IAlbumDAO {
             return albums.isEmpty() ? null : albums.get(0);
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve the album", e);
+            throw new DataAccessException("Could not retrieve the album.", e);
         }
     }
 
@@ -144,7 +144,7 @@ public class AlbumDAO implements IAlbumDAO {
             }
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not update the album", e);
+            throw new DataAccessException("Could not update the album.", e);
         }
     }
 
@@ -156,7 +156,7 @@ public class AlbumDAO implements IAlbumDAO {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            throw new DataAccessException("Could not remove the album", e);
+            throw new DataAccessException("Could not remove the album.", e);
         }
     }
 

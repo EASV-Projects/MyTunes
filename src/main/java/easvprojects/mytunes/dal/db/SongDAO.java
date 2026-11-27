@@ -70,8 +70,6 @@ public class SongDAO implements ISongDAO {
                 try (PreparedStatement ps = c.prepareStatement(INSERT_SONG, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setString(1, song.getName());
                     setArtistAndAlbum(ps, 2, song);
-                    ps.setString(1, song.getName());
-                    setArtistAndAlbum(ps, 2, song);
                     setLength(ps, 4, song);
                     setFilePath(ps, 5, song);
                     ps.executeUpdate();
@@ -183,7 +181,7 @@ public class SongDAO implements ISongDAO {
             ps.setInt(1, song.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DataAccessException("Could not delete the song", e);
+            throw new DataAccessException("Could not delete the song.", e);
         }
     }
 
@@ -196,7 +194,7 @@ public class SongDAO implements ISongDAO {
             ps.setInt(1, id);
             return readSongs(c, ps);
         } catch (SQLException e) {
-            throw new DataAccessException("Could not retrieve songs", e);
+            throw new DataAccessException("Could not retrieve songs.", e);
         }
     }
 
