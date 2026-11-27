@@ -4,7 +4,7 @@ import easvprojects.mytunes.dal.IDBConnector;
 
 import easvprojects.mytunes.be.Artist;
 import easvprojects.mytunes.dal.IArtistDAO;
-
+import easvprojects.mytunes.dal.DataAccessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,6 +47,9 @@ public class ArtistDAO implements IArtistDAO {
             ps.setString(1, artist.getName());
             ps.executeUpdate();
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not insert the artist.", e);
+        }
     }
 
     /**
@@ -61,6 +64,9 @@ public class ArtistDAO implements IArtistDAO {
              PreparedStatement ps = c.prepareStatement(SELECT_ALL_ARTISTS);
              ResultSet rs = ps.executeQuery()) {
             return readArtists(rs);
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve artists.", e);
         }
     }
 
@@ -80,6 +86,9 @@ public class ArtistDAO implements IArtistDAO {
                 return readArtists(rs);
             }
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve artist.", e);
+        }
     }
 
     /**
@@ -98,6 +107,9 @@ public class ArtistDAO implements IArtistDAO {
                 return rs.next() ? readArtist(rs) : null;
             }
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve artist.", e);
+        }
     }
 
     /**
@@ -114,6 +126,9 @@ public class ArtistDAO implements IArtistDAO {
             ps.setInt(2, artist.getId());
             ps.executeUpdate();
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not update the artist.", e);
+        }
     }
 
     /**
@@ -129,6 +144,9 @@ public class ArtistDAO implements IArtistDAO {
              PreparedStatement ps = c.prepareStatement(DELETE_ARTIST)) {
             ps.setInt(1, id);
             ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not remove the artist.", e);
         }
     }
 

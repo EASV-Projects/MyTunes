@@ -4,6 +4,7 @@ import easvprojects.mytunes.dal.IDBConnector;
 
 import easvprojects.mytunes.be.Genre;
 import easvprojects.mytunes.dal.IGenreDAO;
+import easvprojects.mytunes.dal.DataAccessException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +40,10 @@ public class GenreDAO implements IGenreDAO {
             ps.setString(1, genre.getName());
             ps.executeUpdate();
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not insert the genre.", e);
+        }
+
     }
 
     @Override
@@ -47,6 +52,9 @@ public class GenreDAO implements IGenreDAO {
              PreparedStatement ps = c.prepareStatement(SELECT_ALL_GENRES);
              ResultSet rs = ps.executeQuery()) {
             return readGenres(rs);
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve genres.", e);
         }
     }
 
@@ -59,6 +67,9 @@ public class GenreDAO implements IGenreDAO {
                 return readGenres(rs);
             }
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not search for genres.", e);
+        }
     }
 
     @Override
@@ -69,6 +80,9 @@ public class GenreDAO implements IGenreDAO {
             ps.setInt(2, genre.getId());
             ps.executeUpdate();
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not update the genre.", e);
+        }
     }
 
     @Override
@@ -77,6 +91,9 @@ public class GenreDAO implements IGenreDAO {
              PreparedStatement ps = c.prepareStatement(DELETE_GENRE)) {
             ps.setInt(1, id);
             ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not remove the genre.", e);
         }
     }
 

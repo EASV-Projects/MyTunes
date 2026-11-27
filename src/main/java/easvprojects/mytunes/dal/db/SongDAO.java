@@ -1,4 +1,5 @@
 package easvprojects.mytunes.dal.db;
+import easvprojects.mytunes.dal.DataAccessException;
 
 import easvprojects.mytunes.dal.IDBConnector;
 
@@ -70,8 +71,6 @@ public class SongDAO implements ISongDAO {
                 try (PreparedStatement ps = c.prepareStatement(INSERT_SONG, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setString(1, song.getName());
                     setArtistAndAlbum(ps, 2, song);
-                    ps.setString(1, song.getName());
-                    setArtistAndAlbum(ps, 2, song);
                     setLength(ps, 4, song);
                     setFilePath(ps, 5, song);
                     ps.executeUpdate();
@@ -94,7 +93,9 @@ public class SongDAO implements ISongDAO {
         try (Connection c = dbConnector.getConnection();
              PreparedStatement ps = c.prepareStatement(SELECT_ALL_SONGS)) {
             return readSongs(c, ps);
-        }
+        } catch (SQLException e) {
+        throw new DataAccessException("Could not retrieve songs.", e);
+    }
     }
 
     @Override
@@ -109,6 +110,8 @@ public class SongDAO implements ISongDAO {
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, query);
             return readSongs(c, ps);
+        } catch (SQLException e) {
+            throw new DataAccessException("Could not search for songs.", e);
         }
     }
 
@@ -173,7 +176,7 @@ public class SongDAO implements ISongDAO {
                 c.commit();
             } catch (Exception e) {
                 c.rollback();
-                throw e;
+                throw new DataAccessException("Could not update the song.", e);
             }
         }
     }
@@ -185,6 +188,8 @@ public class SongDAO implements ISongDAO {
              PreparedStatement ps = c.prepareStatement(DELETE_SONG)) {
             ps.setInt(1, song.getId());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Could not delete the song.", e);
         }
     }
 
@@ -196,6 +201,8 @@ public class SongDAO implements ISongDAO {
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, id);
             return readSongs(c, ps);
+        } catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve songs.", e);
         }
     }
 
