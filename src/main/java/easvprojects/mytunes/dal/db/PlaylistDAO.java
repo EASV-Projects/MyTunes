@@ -1,5 +1,5 @@
 package easvprojects.mytunes.dal.db;
-
+import easvprojects.mytunes.dal.DataAccessException;
 import easvprojects.mytunes.dal.IDBConnector;
 
 import easvprojects.mytunes.be.Genre;
@@ -10,6 +10,7 @@ import easvprojects.mytunes.dal.IPlaylistDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,8 @@ public class PlaylistDAO implements IPlaylistDAO {
             ps.setInt(2, song.getId());
             ps.setInt(3, playlist.getId());
             ps.executeUpdate();
+        }catch (SQLException e) {
+            throw new DataAccessException("Could not add the song to the playlist", e);
         }
     }
 
@@ -117,6 +120,8 @@ public class PlaylistDAO implements IPlaylistDAO {
             ps.setString(2, playlist.getDescription());
             ps.setInt(3, playlist.getId());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Could not udpate the playlist", e);
         }
     }
 
@@ -133,9 +138,8 @@ public class PlaylistDAO implements IPlaylistDAO {
                 // Close the gap: everything after the removed entry moves up one place
                 shift(c, SHIFT_ENTRIES_UP, playlist.getId(), position, Integer.MAX_VALUE);
                 c.commit();
-            } catch (Exception e) {
-                c.rollback();
-                throw e;
+            }catch (SQLException e) {
+                throw new DataAccessException("Could not remove the song from the playlist", e);
             }
         }
     }
@@ -161,9 +165,8 @@ public class PlaylistDAO implements IPlaylistDAO {
                     ps.executeUpdate();
                 }
                 c.commit();
-            } catch (Exception e) {
-                c.rollback();
-                throw e;
+            } catch (SQLException e) {
+                throw new DataAccessException("Could not move the song", e);
             }
         }
     }
@@ -200,6 +203,8 @@ public class PlaylistDAO implements IPlaylistDAO {
                     throw new IllegalArgumentException("No song at position " + position + " on playlist " + playlistId);
                 }
                 return rs.getInt("id");
+            } catch (SQLException e) {
+                throw new DataAccessException("Could not find the entry", e);
             }
         }
     }

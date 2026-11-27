@@ -5,6 +5,7 @@ import easvprojects.mytunes.be.Genre;
 import easvprojects.mytunes.dal.IAlbumDAO;
 import easvprojects.mytunes.dal.IDBConnector;
 import easvprojects.mytunes.dal.ISongDAO;
+import easvprojects.mytunes.dal.DataAccessException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -64,9 +65,9 @@ public class AlbumDAO implements IAlbumDAO {
                 }
                 insertGenres(c, albumId, album.getGenres());
                 c.commit();
-            } catch (Exception e) {
-                c.rollback();
-                throw e;
+            } catch (SQLException e) {
+                throw new DataAccessException("Could not insert the album", e);
+
             }
         }
     }
@@ -77,6 +78,9 @@ public class AlbumDAO implements IAlbumDAO {
              PreparedStatement ps = c.prepareStatement(SELECT_ALL_ALBUMS)) {
             return readAlbums(c, ps);
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve albums", e);
+        }
     }
 
     @Override
@@ -85,6 +89,9 @@ public class AlbumDAO implements IAlbumDAO {
              PreparedStatement ps = c.prepareStatement(SELECT_ALBUMS_BY_NAME)) {
             ps.setString(1, name);
             return readAlbums(c, ps);
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve albums", e);
         }
     }
 
@@ -95,6 +102,9 @@ public class AlbumDAO implements IAlbumDAO {
             ps.setInt(1, genre.getId());
             return readAlbums(c, ps);
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve albums", e);
+        }
     }
 
     @Override
@@ -104,6 +114,9 @@ public class AlbumDAO implements IAlbumDAO {
             ps.setInt(1, id);
             List<Album> albums = readAlbums(c, ps);
             return albums.isEmpty() ? null : albums.get(0);
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not retrieve the album", e);
         }
     }
 
@@ -129,6 +142,9 @@ public class AlbumDAO implements IAlbumDAO {
                 throw e;
             }
         }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not update the album", e);
+        }
     }
 
     @Override
@@ -137,6 +153,9 @@ public class AlbumDAO implements IAlbumDAO {
              PreparedStatement ps = c.prepareStatement(DELETE_ALBUM)) {
             ps.setInt(1, id);
             ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Could not remove the album", e);
         }
     }
 
@@ -182,5 +201,7 @@ public class AlbumDAO implements IAlbumDAO {
                 ps.executeUpdate();
             }
         }
+
+
     }
 }
